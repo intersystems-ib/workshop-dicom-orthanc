@@ -1,0 +1,12 @@
+{
+    "Name" : "${ORTHANC_NAME} in Docker Compose",
+    "RemoteAccessAllowed" : true,
+    "AuthenticationEnabled": true,
+    "RegisteredUsers": {
+        "demo": "demo-pwd"
+    },
+    "DicomAssociationCloseDelay": 0,
+    "DicomModalities" : {
+        "iris" : [ "IRIS", "host.docker.internal", 2010 ]
+      }
+}
