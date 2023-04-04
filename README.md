@@ -13,12 +13,12 @@ You can find more in-depth information in https://learning.intersystems.com.
 Build the image we will use during the workshop:
 
 ```console
-$ git clone https://github.com/intersystems-ib/workshop-multple-instances
-$ cd workshop-multiple-instances
+$ git clone https://github.com/intersystems-ib/workshop-dicom-orthanc
+$ cd workshop-dicom-orthanc
 $ docker-compose build
 ```
 
-Then, open the `workshop-multiple-instances` in your VS Code.
+Then, open the `workshop-dicom-orthanc` in your VS Code.
 
 In order to deploy docker containers you only need to execute the following command from your terminal/console:
 
@@ -26,16 +26,23 @@ In order to deploy docker containers you only need to execute the following comm
 $ docker-compose up -d
 ```
 
+# ORTHANC
+
+Orthanc is an open source and standalone DICOM server. Orthanc aims at providing a simple, yet powerful standalone DICOM server. It is designed to improve the DICOM flows in hospitals and to support research about the automated analysis of medical images. Orthanc lets its users focus on the content of the DICOM files, hiding the complexity of the DICOM format and of the DICOM protocol.
+
+The Orthanc container is configured by orthanc.json file in which is defined the user and password (demo/demo-pwd) for the web application and the data for all available modalities (in this case just IRIS for Health instance).
+
 # Configuration
 
-After the Docker deployment you'll find two IRIS instances running with the names mirrorA and mirrorB. An Arbiter will be running too.
-By default the deployment of the containers will install two applications (PHONEBOOK and COMPANY) for each IRIS instance. This applications will create three different namespaces (PERSONAL, CUSTOMER and PHONEBOOK) with their respective databases. With these databases you will be able to configure it to work in Mirror.
+After the Docker deployment you'll find one IRIS for Health instance running with the name IRIS and an ORTHANC instance. The deployment of the containers will configure a DICOM namespace with a fully functional production configured to work with DICOM files and ORTHANC by default.
+You will find in /shared/durable/in folder some DICOM files that you can use to test the production
 
 The applications are accessible from the following routes: 
 
-* [Phonebook app in mirrorA](http://localhost:52775/csp/phonebook/Phonebook.AllStart.cls)
-* [Company app in mirrorA](http://localhost:52775/csp/company/Company.csp)
-* [Phonebook app in mirrorB](http://localhost:52776/csp/phonebook/Phonebook.AllStart.cls)
-* [Company app in mirrorB](http://localhost:52775/csp/company/Company.csp)
+* [IRIS for Health Management Portal](http://localhost:52773/csp/sys/UtilHome.csp)
+* [ORTHANC instance](http://localhost:8282)
 
-From these applications you will be able to create new records for the databases and check how the mirror works, replicating the mirrored databases from mirrorA to mirrorB. You can refer to [IRIS documentation](https://docs.intersystems.com/irislatest/csp/docbook/DocBook.UI.Page.cls?KEY=GHA_mirror_set_config) to get more information about mirroring.
+The production configured by default has 2 different Business Services:
+
+* EnsLib.DICOM.Service.File: gets all the files available in /shared/durable/in folder and resend it to Workshop.DICOM.Production.StorageFile to resend it to Orthanc by TCP.
+* EnsLib.DICOM.Service.TCP: receives all DICOM files sent by TCP calls from Orthanc and redirect it to Demo.DICOM.Process.StorageLocal to save it in a file into /shared/durable/repository folder. 
