@@ -23,6 +23,7 @@
   <Item Name="EnsLib.DICOM.Service.File" Category="" ClassName="EnsLib.DICOM.Service.File" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
     <Setting Target="Adapter" Name="FilePath">/shared/durable/in/</Setting>
     <Setting Target="Host" Name="TargetConfigName">Workshop.DICOM.Production.StorageFile</Setting>
+    <Setting Target="Adapter" Name="FileSpec">*.dcm</Setting>
   </Item>
   <Item Name="Workshop.DICOM.Production.StorageFile" Category="" ClassName="Workshop.DICOM.Production.StorageFile" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
     <Setting Target="Host" Name="OperationDuplexName">EnsLib.DICOM.Operation.TCP</Setting>
