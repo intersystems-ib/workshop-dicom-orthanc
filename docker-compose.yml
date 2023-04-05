@@ -14,7 +14,6 @@ services:
       - /tmp/orthanc-db/:/var/lib/orthanc/db/
     hostname: orthanc
   iris:
-    image: intersystems/irishealth-community:2023.1.0.207.0
     container_name: iris
     build:
       context: .

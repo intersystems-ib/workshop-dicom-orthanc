@@ -6,9 +6,6 @@ USER root
 WORKDIR /opt/irisapp
 RUN chown -R irisowner:irisowner /opt/irisapp
 
-# RUN mkdir /usr/irissys/mgr/DICOMDB
-# RUN chown -R irisowner:irisowner /usr/irissys/mgr/DICOMDB
-
 USER irisowner
 
 # copy files to image
