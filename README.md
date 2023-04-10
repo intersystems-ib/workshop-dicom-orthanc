@@ -49,4 +49,4 @@ The production configured by default has 2 different Business Services:
 
 # Community
 
-You can get further information about this workshop from the [Community article](https://community.intersystems.com/post/sending-dicom-files-between-iris-health-and-pacs-software): 
+You can get further information about this workshop from the [Community article](https://community.intersystems.com/post/sending-dicom-files-between-iris-health-and-pacs-software).
