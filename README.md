@@ -46,3 +46,7 @@ The production configured by default has 2 different Business Services:
 
 * EnsLib.DICOM.Service.File: gets all the files available in /shared/durable/in folder and resend it to Workshop.DICOM.Production.StorageFile to resend it to Orthanc by TCP.
 * EnsLib.DICOM.Service.TCP: receives all DICOM files sent by TCP calls from Orthanc and redirect it to Demo.DICOM.Process.StorageLocal to save it in a file into /shared/durable/repository folder. 
+
+# Community
+
+You can get further information about this workshop from the [Community article](https://community.intersystems.com/post/sending-dicom-files-between-iris-health-and-pacs-software): 
