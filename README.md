@@ -40,7 +40,7 @@ You will find in /shared/durable/in folder some DICOM files that you can use to 
 The applications are accessible from the following routes: 
 
 * [IRIS for Health Management Portal](http://localhost:52773/csp/sys/UtilHome.csp)
-* [ORTHANC instance](http://localhost:8282)
+* [ORTHANC instance](http://localhost:8042)
 
 The production configured by default has 2 different Business Services:
 
