@@ -27,6 +27,7 @@ services:
     - ./shared:/shared
     command: 
       --check-caps false
+      --ISCAgent false
     hostname: iris
   
 secrets:
