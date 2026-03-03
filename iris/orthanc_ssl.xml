@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SSLConfigsExport>
+  <SSLConfigs>
+    <AuthorizeCN>false</AuthorizeCN>
+    <CAFile>/shared/pki/ca/ca.crt</CAFile>
+    <CertificateFile>/shared/pki/iris/iris-scu.crt</CertificateFile>
+    <CipherList>ALL:!aNULL:!eNULL:!EXP:!SSLv2</CipherList>
+    <Ciphersuites>TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256</Ciphersuites>
+    <Enabled>true</Enabled>
+    <Name>ORTHANC_TLS</Name>
+    <OCSP>0</OCSP>
+    <OCSPRequestFailures>0</OCSPRequestFailures>
+    <OCSPTimeout>2</OCSPTimeout>
+    <PrivateKeyFile>/shared/pki/iris/iris-scu.key</PrivateKeyFile>
+    <PrivateKeyType>2</PrivateKeyType>
+    <TLSMaxVersion>32</TLSMaxVersion>
+    <TLSMinVersion>16</TLSMinVersion>
+    <Type>false</Type>
+    <VerifyDepth>9</VerifyDepth>
+    <VerifyPeer>1</VerifyPeer>
+    <Version>1</Version>
+  </SSLConfigs>
+</SSLConfigsExport>

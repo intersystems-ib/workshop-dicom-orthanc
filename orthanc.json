@@ -6,7 +6,12 @@
         "demo": "demo-pwd"
     },
     "DicomAssociationCloseDelay": 0,
+    "DicomTlsEnabled": true,
+    "DicomTlsCertificate": "/shared/pki/orthanc/orthanc.crt",
+    "DicomTlsPrivateKey": "/shared/pki/orthanc/orthanc.key",
+    "DicomTlsTrustedCertificates": "/shared/pki/trusted/trusted.crt",
+
     "DicomModalities" : {
-        "iris" : [ "IRIS", "host.docker.internal", 2010 ]
+        "iris" : [ "IRIS", "iris", 2010 ]
       }
 }

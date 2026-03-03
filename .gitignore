@@ -3,4 +3,5 @@ shared/durable/out/*.dcm
 shared/durable/repository/*.dcm
 shared/durable/repository/*.stream
 shared/durable/out/*.stream
+shared/durable/data
 .vscode

@@ -1,4 +1,4 @@
-ARG IMAGE=containers.intersystems.com/intersystems/irishealth-community:2023.1.0.218.0
+ARG IMAGE=containers.intersystems.com/intersystems/irishealth-community:latest-em
 FROM $IMAGE
 
 USER root
@@ -10,32 +10,16 @@ USER irisowner
 
 # copy files to image
 WORKDIR /opt/irisapp
-#COPY --chown=irisowner:irisowner /iris/iris.script iris.script
-COPY --chown=irisowner:irisowner src src
 
-COPY --chown=$ISC_PACKAGE_MGRUSER:$ISC_PACKAGE_IRISGROUP /iris/irissession.sh /
-RUN chmod +x /irissession.sh
+COPY --chown=irisowner:irisowner /iris/src src
 
-SHELL ["/irissession.sh"]
+COPY --chown=$ISC_PACKAGE_MGRUSER:$ISC_PACKAGE_IRISGROUP /iris/iris.cpf /
+RUN chmod +x /iris.cpf
 
-RUN \
-  zn "%SYS" \
-  set sc = $SYSTEM.OBJ.LoadDir("/opt/irisapp/src/Test", "ck", , 1) \
-  if sc do ##class(DICOM.Installer).Install() \
-  # DICOM connection creation
-  zn "DICOM" \
-  set sc = $SYSTEM.OBJ.LoadDir("/opt/irisapp/src/Production", "ck", , 1) \
-  Do ##class(EnsLib.DICOM.Util.AssociationContext).CreateAssociation("IRIS","ORTHANC",) \
-  Do ##class(EnsLib.DICOM.Util.AssociationContext).CreateAssociation("ORTHANC","IRIS") \
-  Do ##class(EnsLib.DICOM.Util.AssociationContext).ImportAssociation("/opt/irisapp/src/DICOM/associations.txt","IRIS","ORTHANC",0) \
-  Do ##class(EnsLib.DICOM.Util.AssociationContext).ImportAssociation("/opt/irisapp/src/DICOM/associations.txt","ORTHANC","IRIS",0) \
-  # start production
-  set production = "DICOMPKG.FoundationProduction" \
-  set ^Ens.Configuration("csp","LastProduction") = production \
-  do ##class(Ens.Director).SetAutoStart(production) \
-  set sc = 1
+ENV ISC_CPF_MERGE_FILE=/iris.cpf
 
-# run iris.script
-# RUN iris start IRIS \
-#   && iris session IRIS < /opt/irisapp/iris.script \
-#   && iris stop IRIS quietly
+COPY /iris/iris.script /tmp/iris.script
+
+RUN iris start IRIS \
+	&& iris session IRIS < /tmp/iris.script \
+    && iris stop IRIS quietly

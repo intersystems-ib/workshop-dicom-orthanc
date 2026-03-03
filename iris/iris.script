@@ -1,0 +1,15 @@
+zn "%SYS"
+
+do ##class(SYS.Container).QuiesceForBundling()
+do ##class(Security.Users).UnExpireUserPasswords("*")
+
+zn "DICOM"
+set sc = $SYSTEM.OBJ.LoadDir("/opt/irisapp/src", "ck", , 1)
+Do ##class(EnsLib.DICOM.Util.AssociationContext).CreateAssociation("IRIS","ORTHANC",)
+Do ##class(EnsLib.DICOM.Util.AssociationContext).CreateAssociation("ORTHANC","IRIS")
+Do ##class(EnsLib.DICOM.Util.AssociationContext).ImportAssociation("/opt/irisapp/src/DICOM/associations.txt","IRIS","ORTHANC",0)
+Do ##class(EnsLib.DICOM.Util.AssociationContext).ImportAssociation("/opt/irisapp/src/DICOM/associations.txt","ORTHANC","IRIS",0)
+
+set production = "Demo.DICOM.FoundationProduction"
+set ^Ens.Configuration("csp","LastProduction") = production
+do ##class(Ens.Director).SetAutoStart(production)

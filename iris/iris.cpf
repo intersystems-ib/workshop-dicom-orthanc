@@ -1,0 +1,10 @@
+[Actions]
+CreateDatabase:Name=DICOM_DATA,Directory=/usr/irissys/mgr/DICOM_DATA
+
+CreateDatabase:Name=DICOM_CODE,Directory=/usr/irissys/mgr/DICOM_CODE
+
+CreateNamespace:Name=DICOM,Globals=DICOM_DATA,Routines=DICOM_CODE,Interop=1
+
+ModifyUser:Name=SuperUser,PasswordHash=9b900b7299f13b10d9aa5f41a8ce98b55f7e99831f988f596f7048e6647e4f2c3ebbcd3c104b9510a4a8707c9b864e6e550a95e269b4b1dffb8613d85c10e313,ae216ebb10fa9b741efa40fe91236be31d06af08569cca75f78cde36afeafd88505c3d4b3092238074cac14087b9c95a08214e3c0ecbf62e0527c29c82ce097d,10000,SHA512
+
+CreateSSLConfig:Name=ORTHANC_TLS,AuthorizeCN=0,CAFile=/shared/pki/ca/ca.crt,CertificateFile=/shared/pki/iris/iris-scu.crt,CipherList=ALL:!aNULL:!eNULL:!EXP:!SSLv2,Ciphersuites=TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256,Enabled=1,OCSP=0,OCSPRequestFailures=0,OCSPTimeout=2,PrivateKeyFile=/shared/pki/iris/iris-scu.key,PrivateKeyType=2,TLSMaxVersion=32,TLSMinVersion=16,Type=0,VerifyDepth=9,VerifyPeer=1,Version=1

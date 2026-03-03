@@ -1,7 +1,6 @@
-version: '3.1'  # Secrets are only available since this version of Docker Compose
 services:
   orthanc:
-    image: jodogne/orthanc-plugins:1.11.0
+    image: orthancteam/orthanc
     command: /run/secrets/  # Path to the configuration files (stored as secrets)
     ports:
       - 4242:4242
@@ -12,6 +11,7 @@ services:
       - ORTHANC_NAME=orthanc
     volumes:
       - /tmp/orthanc-db/:/var/lib/orthanc/db/
+      - ./shared:/shared:ro
     hostname: orthanc
   iris:
     container_name: iris
@@ -19,7 +19,7 @@ services:
       context: .
       dockerfile: iris/Dockerfile
     ports:
-    - "52773:52773"
+    - "52774:52773"
     - "2010:2010"
     - "23:2323"
     - "1972:1972"
@@ -29,7 +29,8 @@ services:
       --check-caps false
       --ISCAgent false
     hostname: iris
-  
+    environment:
+    - ISC_DATA_DIRECTORY=/shared/durable/data
 secrets:
   orthanc.json:
     file: orthanc.json
